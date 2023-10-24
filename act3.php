@@ -18,6 +18,7 @@ else
 //inicialización de variables
 $name = $address = $nif = $name_modified = $address_modified = $nif_modified = null;
 
+// funcion para mostrar msg de error y control de excepciones
 function show_error($message) 
 {
     echo "<p>$message</p>";
@@ -27,45 +28,61 @@ function show_error($message)
 function add_person($nif, $name, $address, &$people) 
 {
     foreach ($people as $person) 
-	{   //validar que el nif no exista en la base de datos
+	{   
+        //validar que el nif no exista en la base de datos
         if ($person['nif'] === $nif) 
 		{
             show_error("NIF: $nif ya existe.");
 			return;
         }
+        try 
+        {
+            //guardar la persona en el array
+            $person = [
+                'nif' => $nif,
+                'nombre' => $name,
+                'direccion' => $address
+            ];
+            $people[] = $person;
+            $_SESSION['people'] = $people;
+
+            //mensaje de alta efectuada
+            echo "$name fue añadido.";
+        } 
+        catch (Exception $e) 
+        {
+            $error_msg = 'Error añadiendo persona: '. $e -> getMessage();
+            show_error(($error_msg));
+        }
     }
-
-    //guardar la persona en el array
-    $person = [
-        'nif' => $nif,
-        'nombre' => $name,
-        'direccion' => $address
-    ];
-    $people[] = $person;
-    $_SESSION['people'] = $people;
-
-	//mensaje de alta efectuada
-    echo "$name fue añadido.";
 }
 
 //BAJA DE LA PERSONA SELECCIONADA EN LA TABLA
 	function delete_person($nif, &$people) 
 {
     foreach ($people as $key => &$person) 
-	{   //recuperar y validar el nif
-        if ($person['nif'] === $nif) 
-		{
-            $person_to_delete = $people[$key];
-			//borrar la fila del array
-            unset($people[$key]);
-            $_SESSION['people'] = $people;
-	 		//mensaje de baja efectuada
-            echo "{$person_to_delete['nombre']} fué eliminado.";
-            return;
+    {
+        try 
+        {   //recuperar y validar el nif
+            if ($person['nif'] === $nif) 
+            {
+                $person_to_delete = $people[$key];
+                //borrar la fila del array
+                unset($people[$key]);
+                $_SESSION['people'] = $people;
+                 //mensaje de baja efectuada
+                echo "{$person_to_delete['nombre']} fué eliminado.";
+                return;
+            }
+
+        } 
+        catch (Exception $e) 
+        {
+            $error_msg = "An exception occurred: " . $e->getMessage();
+            show_error("NIF: $nif no fué ecnontrado. Error: " .($error_msg));
         }
     }
-
-    show_error("NIF: $nif no fué ecnontrado.");
+   
 }
 
 function modify_person($nif, $new_name, $new_address, &$people)
@@ -74,30 +91,38 @@ function modify_person($nif, $new_name, $new_address, &$people)
 
     foreach ($people as &$person) 
     {
-        if ($person['nif'] === $nif) 
+        try 
         {
-            if (!empty($new_name)) 
+            if ($person['nif'] === $nif) 
             {
-                $person['nombre'] = ucfirst(strtolower($new_name));
-            }
-            if (!empty($new_address)) 
-            {
-                $person['direccion'] = ucfirst(strtolower($new_address));
-            }
-            $person_modified = true;
-            echo "Person modified: $new_name "; // aplies
+                if (!empty($new_name)) 
+                {
+                    $person['nombre'] = ucfirst(strtolower($new_name));
+                }
+                if (!empty($new_address)) 
+                {
+                    $person['direccion'] = ucfirst(strtolower($new_address));
+                }
+                $person_modified = true;
+                echo "Person modified: $new_name "; 
+            } 
+        } 
+        
+        catch (Exception $e) 
+        {
+            $error_msg = 'Error: ' . $e -> getMessage();
+            show_error($error_msg);
         }
-    }
 
-    if ($person_modified == true) // Entra, aplica
-    {
-        echo "Persona con NIF: $nif fue modificada.";
-        $_SESSION['people'] = $people;
+        if ($person_modified == true) 
+        {
+            echo "Persona con NIF: $nif fue modificada.";
 
-    } 
-    else 
-    {
-        show_error("No se encontró a la persona con NIF: $nif.");
+        }
+        else 
+        {
+            show_error("No se encontró a la persona con NIF: $nif.");
+        }
     }
 }
 
@@ -107,69 +132,103 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
     if (isset($_POST['alta'])) 
 	{
-		//recuperar los datos sin espacios en blanco -trim()-, 1a Mayus y resto Minusculas
-        $nif = trim($_POST["nif"]);
-        $name = ucfirst(strtolower(trim($_POST["nombre"])));
-        $address = ucfirst(strtolower(trim($_POST["direccion"])));
+		try 
+        {
+            //recuperar los datos sin espacios en blanco -trim()-, 1a Mayus y resto Minusculas
+            $nif = trim($_POST["nif"]);
+            $name = ucfirst(strtolower(trim($_POST["nombre"])));
+            $address = ucfirst(strtolower(trim($_POST["direccion"])));
 
-		//validar datos obligatorios
-        if (!empty($nif) && !empty($name) && !empty($address)) 
-		{
-            add_person($nif, $name, $address, $people);
-			//limpiar el formulario
-			$name = $address = $nif = null;
+            //validar datos obligatorios
+            if (!empty($nif) && !empty($name) && !empty($address)) 
+            {
+                add_person($nif, $name, $address, $people);
+                //limpiar el formulario
+                $name = $address = $nif = null;
+            } 
+            else 
+            {
+                show_error("Se deben completar todos los campos.");
+            } 
         } 
-		else 
-		{
-            show_error("Se deben completar todos los campos.");
+        catch (Exception $e) 
+        {
+            $error_msg = 'Error: ' . $e->getMessage();
+            show_error($error_msg);
         }
+       
     }
 
 	//BAJA DE TODAS LAS PERSONAS
     if (isset($_POST['bajas'])) 
 	{
-	// Limpiar el array de personas
-		$people = [];
-        $_SESSION['people'] = $people;
-        echo "Lista eliminada.";
-		$name = $address = $nif = null;
+        try 
+        {
+            // Limpiar el array de personas
+            $people = [];
+            $_SESSION['people'] = $people;
+            echo "Lista eliminada.";
+            $name = $address = $nif = null;
+        } 
+        catch (Exception $e) 
+        {
+            $error_msg = 'Error: ' . $e->getMessage();
+            show_error($error_msg);
+        }
+	    
 
     }
 
 	//BAJA DE PERSONA INDIVIDUAL
     if (isset($_POST['baja'])) 
 	{
-        $nif = trim($_POST["nif"]);
 
-        if (!empty($nif)) 
-		{
-            delete_person($nif, $people);
-			$name = $address = $nif = null;
+        try 
+        {
+            $nif = trim($_POST["nif"]);
 
-        }   
-		else 
-		{
-            show_error("No se encontró el NIF.");
+            if (!empty($nif)) 
+            {
+                delete_person($nif, $people);
+                $name = $address = $nif = null;
+            }   
+            else 
+            {
+                show_error("No se encontró el NIF.");
+            }
+        } 
+        catch (Exception $e) 
+        {
+            $error_msg = 'Error: ' . $e -> getMessage();
+            show_error($error_msg);
         }
+        
     }
 
 
 	if (isset($_POST['nombreModi']) || (isset($_POST['direccionModi']))) 
     {
-		$nif_modified = trim($_POST["nifModi"]);
-		$name_modified = ucfirst(strtolower(trim($_POST["nombreModi"])));
-		$address_modified = ucfirst(strtolower(trim($_POST["direccionModi"])));
-	
-		if ($nif_modified) 
+		try 
         {
-			modify_person($nif_modified, $name_modified, $address_modified, $people);
-		} 
-        else 
+            $nif_modified = trim($_POST["nifModi"]);
+            $name_modified = ucfirst(strtolower(trim($_POST["nombreModi"])));
+            $address_modified = ucfirst(strtolower(trim($_POST["direccionModi"])));
+        
+            if ($nif_modified) 
+            {
+                modify_person($nif_modified, $name_modified, $address_modified, $people);
+            } 
+            else 
+            {
+                show_error("No se proporcionó el NIF para la modificación.");
+            } 
+        } 
+        catch (Exception $e) 
         {
-			show_error("No se proporcionó el NIF para la modificación.");
-		}
+            $error_msg = 'Error: ' . $e->getMessage();
+            show_error($error_msg);
+        }
 	}
-	
 }
 			
 			
