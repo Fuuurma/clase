@@ -7,8 +7,8 @@ session_start();
 
 if (isset($_SESSION['people'])) 
 {   //si existe la variable de sesión substituyo el contenido del array
-    $people = $_SESSION['people'];
-    ksort($people);
+    $people = $_SESSION['people']; //volcar el contenido del array en la variable de sesión
+    ksort($people);//ordenar el array por nif
 } 
 else 
 {   //array para guardar las personas
@@ -94,7 +94,7 @@ function modify_person($nif, $new_name, $new_address, &$people)
         try 
         {
             if ($person['nif'] === $nif) 
-            {
+            { //modificar la persona en el array
                 if (!empty($new_name)) 
                 {
                     $person['nombre'] = ucfirst(strtolower($new_name));
@@ -204,12 +204,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         }
         
     }
-
+	
+						
+			
+			
+			
+		
+	//MODIFICACION DE LA PERSONA SELECCIONADA
 
 	if (isset($_POST['nombreModi']) || (isset($_POST['direccionModi']))) 
     {
 		try 
-        {
+        { //recuperar los datos sin espacios en blanco -trim()-
             $nif_modified = trim($_POST["nifModi"]);
             $name_modified = ucfirst(strtolower(trim($_POST["nombreModi"])));
             $address_modified = ucfirst(strtolower(trim($_POST["direccionModi"])));
@@ -231,38 +237,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 	}
 }
 			
-			
-			
+				
 
 	
 		
-
-	
-			
-
-	//MODIFICACION DE LA PERSONA SELECCIONADA
-	
-		//recuperar los datos sin espacios en blanco -trim()-
-						
-		//validar datos
-			
-		//validar que el nif no exista en la base de datos
-			
-		//guardamos el nombre y dirección en minúsculas con la primera letra en mayúsculas
-			
-		//modificar la persona en el array
-			
-			
-
-	//CONSULTA DE PERSONAS
-
-	//ordenar el array por nif
-	
-	//confeccionar la tabla con las personas del array
-	
-
-	//volcar el contenido del array en la variable de sesión
-
 ?>
 
 <html>
@@ -289,7 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 			<tr><th>NIF</th><th>Nombre</th><th>Dirección</th><th>Eliminar</th></tr>
 			<?php
 foreach ($people as $person ) 
-{
+{ 
     echo "<tr>";
     echo "<td>{$person['nif']}</td>";
     echo "<td><input type='text' class='nombre' value='{$person['nombre']}'></td>";
