@@ -1,0 +1,14 @@
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\obj\Debug\net7.0\Ac3_Repeat.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\obj\Debug\net7.0\Ac3_Repeat.AssemblyInfoInputs.cache
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\obj\Debug\net7.0\Ac3_Repeat.AssemblyInfo.cs
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\obj\Debug\net7.0\Ac3_Repeat.csproj.CoreCompileInputs.cache
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\bin\Debug\net7.0\Ac3_Repeat.exe
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\bin\Debug\net7.0\Ac3_Repeat.deps.json
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\bin\Debug\net7.0\Ac3_Repeat.runtimeconfig.json
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\bin\Debug\net7.0\Ac3_Repeat.dll
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\bin\Debug\net7.0\Ac3_Repeat.pdb
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\obj\Debug\net7.0\Ac3_Repeat.dll
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\obj\Debug\net7.0\refint\Ac3_Repeat.dll
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\obj\Debug\net7.0\Ac3_Repeat.pdb
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\obj\Debug\net7.0\Ac3_Repeat.genruntimeconfig.cache
+C:\Users\34633\Desktop\clase\Sergi\m3_programacio\Ac3_Repeat\obj\Debug\net7.0\ref\Ac3_Repeat.dll
