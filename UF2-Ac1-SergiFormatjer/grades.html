@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav id="navbar">
+            <a href="index.html">Home</a>
+            <a href="Sandwatch.html">Reloj de arena</a>
+            <a href="grades.html">Nota final</a>
+    </nav>
+
+    <div id="content-container">
+        <h1>Notas del exámen</h1>
+
+        <input type="number" id="number" placeholder="Introduce tu nota" required>
+        
+        <br>
+
+        <input type="number" id="percentage" placeholder="Introduce el porcentaje" required>
+
+        <br>
+
+        <button id="submit-operation">Calcula</button>
+        <br>
+        <h2>Resultados</h2>
+        <div id="result-container">
+            <div id="operations-container"></div>
+
+            <div id="total-result-container"></div>
+        </div>
+    </div>
+
+    <script src="javascript/grades.js"></script>    
+</body>
+</html>

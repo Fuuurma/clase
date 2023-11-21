@@ -1,0 +1,75 @@
+body{
+    margin: auto;
+    background-color: bisque;
+}
+#navbar {
+    background-color: darkblue;
+    color: black;
+    height: 10%;
+    min-height: 50px;
+
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    
+}
+
+
+
+
+#navbar a {
+
+    height: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: white; 
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.5s;
+    border: 2px solid black;
+
+    text-decoration: none;
+    color: darkblue;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 25px
+}
+
+
+
+#navbar a:hover {
+    background-color: darkblue;
+    color: white;
+}
+
+
+
+
+#content-container{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    border: 1px solid black;
+    padding: 20px 20px;
+    background-color: lightgray;
+}
+
+
+
+
+#display-sandwatch{
+    margin: auto;
+    text-align: center;
+}
+
+
+#number, #percentage, #submit-operation, #input-number, #submit-value{
+    border-radius: 4px;
+    width: 300px;
+    height: 40px;
+    margin: 15px 25px;
+}
