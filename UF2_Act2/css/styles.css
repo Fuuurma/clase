@@ -1,0 +1,107 @@
+body{
+    background-color: #252422;
+    color: Black;
+    font-weight: bold;
+}
+
+form, #task-list, #robot-list, #task-log{
+    align-items: center;
+    justify-content: center;
+    background-color: #f1faee;
+    height: auto;
+    width: auto;
+    border: 4px solid #7b2cbf;
+    border-radius: 5px;
+    min-width: 300px;
+    /* text-align: start; */
+    padding: 20px 15px;
+    margin-top: 40px;
+}
+
+button{
+    background-color: #7b2cbf;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+    border-radius: 2px;
+    cursor: pointer;
+    text-align: center;
+}
+
+button:hover{
+    background-color: white;
+    color: #7b2cbf;
+    border: 2px solid black;
+}
+
+
+input{
+    margin-bottom: 10px;
+} 
+
+
+#main-content{
+    width: auto;
+    height: auto;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#task-list, #task-log {
+    text-align: center;
+}
+
+#robot-task-list, #task-log-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+    background-color: #f2f2f2;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    font-weight: bold;
+}
+
+.task-item button {
+    background-color: #7b2cbf;
+    color: Black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.task-item button:hover {
+    background-color: #3c096c;
+    color: white
+}
+
+
+#robot-selector, input {
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 2px solid #7b2cbf;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#robot-selector:hover {
+    background-color: #7b2cbf;
+    color: black;
+}
+
+#robot-selector option {
+    background-color: #f2f2f2;
+    color: #7b2cbf;
+}

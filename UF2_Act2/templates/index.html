@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="main-content">
+        
+        <form id="robot-form">
+            <h2>Crear robot</h2>
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" placeholder="Paco Paquito..." required>
+            <br>
+            
+            <label for="model">Modelo:</label>
+            <input type="text" id="model" name="model" placeholder="v3" required>
+            <br>
+
+            <label for="manufactured-date">Fecha fabricación</label>
+            <input type="date" id="manufactured-date" name="manufactured-date" required>
+            <br>
+
+
+            <button type="button" onclick="createRobot()">Crear Robot</button>
+            
+            <br>
+        </form>
+
+        <div id="robot-list">
+            <h2>Lista de Robots</h2>
+            <select id="robot-selector" onchange="setCurrentRobot(this.value)">
+            </select>
+            <br>
+            <button type="button" onclick="addTask()">Agregar Tarea</button>
+            <button type="button" id="show-robot" onclick="showRobot()">Ver robot</button>
+            <button type="button" onclick="changeRobotName()">Cambiar Nombre</button>
+
+            <div id="robot-details"></div>
+
+        </div>
+
+
+        <div id="task-list">
+            <h2>Lista de Tareas</h2>
+            <h4>Robot: <span id="current-robot-task"></span></h4>
+
+            <ul id="robot-task-list">
+
+            </ul>
+        </div>
+
+        <div id="task-log">
+            <h2>Tareas realizadas</h2>
+            <h4>Robot: <span id="current-robot-log"></span></h4>
+            <ul id="task-log-list">
+
+            </ul>
+        </div>
+    </div>
+
+    
+</body>
+    <script src="../javascript/Robot.js"></script>
+</html>
